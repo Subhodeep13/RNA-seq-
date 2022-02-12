@@ -1,0 +1,24 @@
+#Quantification and Pre - Processing 
+
+#Preprocessing 
+
+#FASTQC
+#use default file in the repoisorty to install fastqc and unzip the file at your end before going for the analysis
+fastqc {"home diretory path"}/*.fastq.gz
+
+
+#trimgalore 
+#installing trimgalore 
+sudo apt install trim_galore
+#running trimgalore on your samples 
+trim_galore {"home diretory path"}/*.fastq.gz
+
+
+#read indexing and quantification 
+#salmon 
+#installing salmon 
+sudo apt install salmon
+#crearting index of fasta files 
+salmon index -t {"path to the diretory where trimgalore reads are stored"}/*.fastq.gz -i {transcripts_index -diretory_path} --decoys decoys.txt -k 31
+#creating quantification file 
+salmon quant -i {"transcripts_index_path to trascript_index"} -l A -1 {"path of trimgalore files"}reads1.fq -2 {"path of trimgalore files"}reads2.fq --validateMappings -o transcripts_quant
